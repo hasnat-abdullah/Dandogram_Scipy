@@ -1,0 +1,29 @@
+import numpy as np
+import pandas as pd
+from scipy.cluster.hierarchy import dendrogram, linkage
+from matplotlib import pyplot as plt
+import plotly.figure_factory as ff
+
+df = pd.read_csv("animal_date.csv")
+print(df.head())
+rawData = df.iloc[:,1:-1]
+linked = linkage(rawData, 'single')
+
+labelList = df.iloc[:, 0].values
+# lab = df.set_index(0).T
+
+print(rawData)
+print(labelList)
+# plt.figure(figsize=(10, 7))
+# dendrogram(linked,
+#             orientation='top',
+#             labels=labelList,
+#             distance_sort='descending',
+#             show_leaf_counts=True)
+# plt.show()
+#
+# X = np.random.rand(15, 10) # 15 samples, with 10 dimensions each
+
+fig = ff.create_dendrogram(rawData, labels=labelList)
+# fig.update_layout(width=800, height=500)
+fig.show()
